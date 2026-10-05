@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Git Log - Ex5 Demo</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0d1117;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Consolas', 'Courier New', monospace;
+    padding: 40px;
+  }
+  .terminal {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    padding: 28px 36px;
+    min-width: 720px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  }
+  .title-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    align-items: center;
+  }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot-red { background: #ff5f57; }
+  .dot-yellow { background: #febc2e; }
+  .dot-green { background: #28c840; }
+  .title-text {
+    margin-left: 12px;
+    color: #8b949e;
+    font-size: 13px;
+  }
+  .cmd-line { font-size: 14px; margin-bottom: 14px; color: #8b949e; }
+  .cmd-user { color: #58a6ff; }
+  .cmd-path { color: #58a6ff; }
+  .cmd-text { color: #f0f6fc; }
+  .log-line { font-size: 14px; margin: 6px 0; display: flex; gap: 12px; align-items: baseline; }
+  .hash { color: #79c0ff; font-weight: 600; }
+  .revert-msg { color: #3fb950; font-weight: 500; }
+  .bug-msg { color: #e3b341; }
+  .fix-msg { color: #a5d6ff; }
+  .normal-msg { color: #c9d1d9; }
+  .prompt-after { font-size: 14px; margin-top: 16px; color: #8b949e; }
+  .label-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: 700;
+    vertical-align: middle;
+    margin-left: 6px;
+    text-transform: uppercase;
+  }
+  .badge-revert { background: rgba(63, 185, 80, 0.2); color: #3fb950; border: 1px solid #3fb950; }
+  .badge-bug { background: rgba(227, 179, 65, 0.2); color: #e3b341; border: 1px solid #e3b341; }
+  .badge-fix { background: rgba(121, 192, 255, 0.2); color: #79c0ff; border: 1px solid #79c0ff; }
+  .divider { border-top: 1px solid #21262d; margin: 16px 0; }
+  .legend { display: flex; gap: 20px; margin-top: 14px; font-size: 12px; color: #8b949e; }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+</style>
+</head>
+<body>
+  <div class="terminal">
+    <div class="title-bar">
+      <span class="dot dot-red"></span>
+      <span class="dot dot-yellow"></span>
+      <span class="dot dot-green"></span>
+      <span class="title-text">zsh — ~/Dev-ops/ss4/ex5</span>
+    </div>
+
+    <div class="cmd-line">
+      <span class="cmd-user">Longle183@LAPTOP</span>
+      <span> </span>
+      <span class="cmd-path">~/ex5</span>
+      <span style="color:#8b949e"> % </span>
+      <span class="cmd-text">git log --oneline -n 6</span>
+    </div>
+
+    <div class="log-line">
+      <span class="hash">7cd81dc</span>
+      <span class="revert-msg">Revert "feat: update delete function (critical bug - deletes all tasks)"</span>
+      <span class="label-badge badge-revert">REVERT</span>
+    </div>
+    <div class="log-line">
+      <span class="hash">aad26b3</span>
+      <span class="bug-msg">feat: update delete function (critical bug - deletes all tasks)</span>
+      <span class="label-badge badge-bug">BUG</span>
+    </div>
+    <div class="log-line">
+      <span class="hash">2bab311</span>
+      <span class="fix-msg">fix: rewrite sortTasks with correct logic after reset</span>
+      <span class="label-badge badge-fix">FIX</span>
+    </div>
+    <div class="log-line">
+      <span class="hash">a07ec09</span>
+      <span class="normal-msg">feat: add filter and search functionality</span>
+    </div>
+    <div class="log-line">
+      <span class="hash">68eff2a</span>
+      <span class="normal-msg">feat: initialize task management web app with HTML and JS</span>
+    </div>
+
+    <div class="divider"></div>
+    <div class="legend">
+      <div class="legend-item"><span class="legend-dot" style="background:#3fb950"></span> Commit Revert mới (Case 2)</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#e3b341"></span> Commit lỗi đã push lên remote</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#79c0ff"></span> Fix sau khi Reset (Case 1)</div>
+    </div>
+
+    <div class="prompt-after">
+      <span class="cmd-user">Longle183@LAPTOP</span>
+      <span> </span>
+      <span class="cmd-path">~/ex5</span>
+      <span style="color:#8b949e"> % </span>
+      <span style="color:#f0f6fc">█</span>
+    </div>
+  </div>
+</body>
+</html>
