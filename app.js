@@ -1,4 +1,4 @@
-// TaskFlow - Initial Base App Logic
+// TaskFlow - Initial Base App Logic with Filter & Search
 let tasks = [
   { id: 1, title: 'Thiết kế giao diện ứng dụng TaskFlow', priority: 'high', completed: true },
   { id: 2, title: 'Tìm hiểu cơ chế Git Reset (--soft, --mixed, --hard)', priority: 'medium', completed: false },
@@ -9,13 +9,30 @@ const taskList = document.getElementById('taskList');
 const taskInput = document.getElementById('taskInput');
 const prioritySelect = document.getElementById('prioritySelect');
 const addBtn = document.getElementById('addBtn');
+const searchInput = document.getElementById('searchInput');
+const filterStatus = document.getElementById('filterStatus');
+const sortBtn = document.getElementById('sortBtn');
 const totalTasksEl = document.getElementById('totalTasks');
 const pendingTasksEl = document.getElementById('pendingTasks');
 const completedTasksEl = document.getElementById('completedTasks');
 
-function renderTasks(items = tasks) {
+function getFilteredTasks() {
+  const keyword = searchInput.value.toLowerCase().trim();
+  const status = filterStatus.value;
+
+  return tasks.filter(task => {
+    const matchesKeyword = task.title.toLowerCase().includes(keyword);
+    const matchesStatus = status === 'all' || 
+      (status === 'completed' && task.completed) || 
+      (status === 'pending' && !task.completed);
+    return matchesKeyword && matchesStatus;
+  });
+}
+
+function renderTasks(items = null) {
+  const displayItems = items !== null ? items : getFilteredTasks();
   taskList.innerHTML = '';
-  items.forEach(task => {
+  displayItems.forEach(task => {
     const li = document.createElement('li');
     li.className = `task-item ${task.completed ? 'task-completed' : ''}`;
     li.innerHTML = `
@@ -67,6 +84,9 @@ addBtn.addEventListener('click', addTask);
 taskInput.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') addTask();
 });
+
+searchInput.addEventListener('input', () => renderTasks());
+filterStatus.addEventListener('change', () => renderTasks());
 
 // Khởi chạy ban đầu
 renderTasks();
