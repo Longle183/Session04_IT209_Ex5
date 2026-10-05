@@ -1,11 +1,11 @@
-// TaskFlow - App Logic with Filter, Search & Fixed Sort
+// TaskFlow - App Logic - BUGGY delete logic (xóa nhầm tất cả task)
 let tasks = [
   { id: 1, title: 'Thiết kế giao diện ứng dụng TaskFlow', priority: 'high', completed: true },
   { id: 2, title: 'Tìm hiểu cơ chế Git Reset (--soft, --mixed, --hard)', priority: 'medium', completed: false },
   { id: 3, title: 'Tìm hiểu cơ chế Git Revert và cách làm việc nhóm', priority: 'high', completed: false }
 ];
 
-let sortDirection = 'desc'; // desc = Mới nhất, asc = Cũ nhất
+let sortDirection = 'desc';
 
 const taskList = document.getElementById('taskList');
 const taskInput = document.getElementById('taskInput');
@@ -77,17 +77,16 @@ function toggleTask(id) {
   renderTasks();
 }
 
+// BUG: Lỗi logic - xóa nhầm TẤT CẢ task thay vì chỉ xóa task có id tương ứng
 function deleteTask(id) {
-  tasks = tasks.filter(t => t.id !== id);
+  tasks = []; // BUG: should be tasks.filter(t => t.id !== id)
   renderTasks();
 }
 
-// Fixed: sắp xếp theo ID (đại diện thời gian tạo) đúng cú pháp
 function sortTasks() {
   sortDirection = sortDirection === 'desc' ? 'asc' : 'desc';
   const label = sortDirection === 'desc' ? 'Mới nhất' : 'Cũ nhất';
   sortBtn.textContent = `Sắp xếp: ${label}`;
-
   tasks.sort((a, b) => sortDirection === 'desc' ? b.id - a.id : a.id - b.id);
   renderTasks();
 }
